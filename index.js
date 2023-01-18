@@ -3,6 +3,9 @@ var app = express();
 const fetch = require('node-fetch');
 const cheerio = require("cheerio");
 
+app.use(cors({
+    origin:'*'
+}));
 app.get('/', function (req, res) {
    res.send('Hello World');
 })
