@@ -52,7 +52,7 @@ app.post('/', async function (req, res) {
     
  })
 var server = app.listen(80, function () {
-   var host = server.address().address
+   var host = process.env.HOST || 'https://localhost'
    var port = process.env.PORT || 80
    
    console.log("Listening at http://%s:%s", host, port)
