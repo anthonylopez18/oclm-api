@@ -19,7 +19,7 @@ app.post('/', async function (req, res) {
             date = new Date(body.year, body.month-1, body.day);
         }
         catch{
-
+            res.send('UGh....');
         }
         
         console.log('year: ' + date.getFullYear());
