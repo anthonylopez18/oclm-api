@@ -16,6 +16,7 @@ app.post('/', async function (req, res) {
         //var body;
         var date = new Date();
         try{
+            console.log(req.body);
             var body = JSON.parse( req.body);
             date = new Date(body.year, body.month-1, body.day);
         }
