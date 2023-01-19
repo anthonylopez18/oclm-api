@@ -8,12 +8,12 @@ app.use(cors({
     methods:['POST']
 }));
 app.get('/', function (req, res) {
-   res.send('Hello World');
+   res.send('OCLM-API');
 })
 app.post('/', async function (req, res) {
     try{
-        let dateToday = Date.now();
-        var date = new Date(dateToday);
+        var body = req.body;
+        var date = new Date(body.year, body.month-1, body.day) || new Date(Date.now());
         console.log('year: ' + date.getFullYear());
         var beginningDate = new Date(date.getFullYear(), 0,1);
         var today = new Date(Date.now());
