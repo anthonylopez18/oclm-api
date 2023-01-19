@@ -13,10 +13,10 @@ app.get('/', function (req, res) {
 })
 app.post('/', async function (req, res) {
     try{
-        var body;
+        //var body;
         var date = new Date();
         try{
-            body = JSON.parse( req.body);
+            var body = JSON.parse( req.body);
             date = new Date(body.year, body.month-1, body.day);
         }
         catch (error){
