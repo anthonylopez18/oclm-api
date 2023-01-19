@@ -18,8 +18,8 @@ app.post('/', async function (req, res) {
             body = req.body;
             date = new Date(body.year, body.month-1, body.day);
         }
-        catch{
-            res.send('UGh....');
+        catch (error){
+            res.send('UGh....' + error);
         }
         
         console.log('year: ' + date.getFullYear());
