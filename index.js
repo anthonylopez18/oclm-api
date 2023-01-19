@@ -53,7 +53,7 @@ app.post('/',jsonParser, async function (req, res) {
         console.log('diff: ' + diffDays);
         var weekNumber = Number.parseFloat((diffDays/7)+1).toFixed(0);
         console.log(weekNumber);
-        const url = "https://wol.jw.org/en/wol/meetings/"+rValue+"/lp-"+language+"/"+date.getFullYear()+"/"+weekNumber;
+        const url = "https://wol.jw.org/en/wol/meetings/r"+rValue+"/lp-"+language+"/"+date.getFullYear()+"/"+weekNumber;
         
         console.log('url: '+url);
         const responseObj = [];
