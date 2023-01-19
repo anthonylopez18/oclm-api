@@ -4,6 +4,8 @@ const fetch = require('node-fetch');
 const cheerio = require("cheerio");
 const cors = require('cors');
 const { json } = require('express');
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 app.use(cors({
     origin:['http://localhost:3000', '*'],
     methods:['POST']
@@ -11,7 +13,7 @@ app.use(cors({
 app.get('/', function (req, res) {
    res.send('OCLM-API');
 })
-app.post('/', async function (req, res) {
+app.post('/',jsonParser, async function (req, res) {
     try{
         //var body;
         var date = new Date();
