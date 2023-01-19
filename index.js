@@ -22,8 +22,8 @@ app.post('/',jsonParser, async function (req, res) {
         try{
             console.log(req.body);
             date = new Date(req.body.year, req.body.month-1, req.body.day);
-            
-            switch(req.body.language.toUpperCase()){
+            //var reqLanguage = req.body.language;
+            switch(req.body.language.toString().toUppserCase()){
                 case "ENGLISH":
                     language = "e";
                     rValue = 1
