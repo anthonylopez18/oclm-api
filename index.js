@@ -19,7 +19,7 @@ app.post('/',jsonParser, async function (req, res) {
         var date = new Date();
         try{
             console.log(req.body);
-            date = new Date(req.year, req.month-1, req.day);
+            date = new Date(req.body.year, req.body.month-1, req.body.day);
         }
         catch (error){
             res.send('UGh....' + error);
