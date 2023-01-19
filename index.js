@@ -27,10 +27,10 @@ app.post('/',jsonParser, async function (req, res) {
         
         console.log('year: ' + date.getFullYear());
         var beginningDate = new Date(date.getFullYear(), 0,1);
-        var today = new Date(Date.now());
+        var reqDate = date; //new Date(Date.now());
         
-        var diff = today - beginningDate;
-        var diffTime = Math.abs(today - beginningDate);
+        var diff = reqDate - beginningDate;
+        var diffTime = Math.abs(reqDate - beginningDate);
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         console.log('diff: ' + diffDays);
         var weekNumber = Number.parseFloat((diffDays/7)+1).toFixed(0);
