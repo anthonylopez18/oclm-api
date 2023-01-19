@@ -17,9 +17,27 @@ app.post('/',jsonParser, async function (req, res) {
     try{
         //var body;
         var date = new Date();
+        var language = "e";
+        var rValue = 1;
         try{
             console.log(req.body);
             date = new Date(req.body.year, req.body.month-1, req.body.day);
+            
+            switch(req.body.language.toUpperCase()){
+                case "ENGLISH":
+                    language = "e";
+                    rValue = 1
+                    break;
+                case "TAGALOG":
+                    language = "tg";
+                    rValue = 27
+                    break;
+                default:
+                    language = "e";
+                    rValue = 1
+                    break;
+            }
+            
         }
         catch (error){
             res.send('UGh....' + error);
@@ -35,7 +53,7 @@ app.post('/',jsonParser, async function (req, res) {
         console.log('diff: ' + diffDays);
         var weekNumber = Number.parseFloat((diffDays/7)+1).toFixed(0);
         console.log(weekNumber);
-        const url = "https://wol.jw.org/en/wol/meetings/r1/lp-e/"+date.getFullYear()+"/"+weekNumber;
+        const url = "https://wol.jw.org/en/wol/meetings/"+rValue+"/lp-"+language+"/"+date.getFullYear()+"/"+weekNumber;
         
         console.log('url: '+url);
         const responseObj = [];
