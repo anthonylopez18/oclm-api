@@ -3,6 +3,7 @@ var app = express();
 const fetch = require('node-fetch');
 const cheerio = require("cheerio");
 const cors = require('cors');
+const { json } = require('express');
 app.use(cors({
     origin:['http://localhost:3000', '*'],
     methods:['POST']
@@ -12,10 +13,10 @@ app.get('/', function (req, res) {
 })
 app.post('/', async function (req, res) {
     try{
-        var body = Date.now();
+        var body;
         var date = new Date();
         try{
-            body = req.body;
+            body = JSON.parse( req.body);
             date = new Date(body.year, body.month-1, body.day);
         }
         catch (error){
