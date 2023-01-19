@@ -12,8 +12,16 @@ app.get('/', function (req, res) {
 })
 app.post('/', async function (req, res) {
     try{
-        var body = req.body;
-        var date = new Date(body.year, body.month-1, body.day) || new Date(Date.now());
+        var body = Date.now();
+        var date = new Date();
+        try{
+            body = req.body;
+            date = new Date(body.year, body.month-1, body.day);
+        }
+        catch{
+
+        }
+        
         console.log('year: ' + date.getFullYear());
         var beginningDate = new Date(date.getFullYear(), 0,1);
         var today = new Date(Date.now());
