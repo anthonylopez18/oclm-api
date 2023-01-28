@@ -24,17 +24,11 @@ app.use(cors({
     methods:['POST']
 }));
 app.get('/', async function (req, res) {
-    const docRef = db.collection('users').doc('alovelace');
     const snapshot = await db.collection('users').get();
     snapshot.forEach((doc) => {
         console.log(doc.id, '=>', doc.data());
       });
-    await docRef.set({
-    first: 'Ada',
-    last: 'Lovelace',
-    born: 1815
-    });
-
+    
     res.send('OCLM-API');
 })
 
@@ -137,7 +131,7 @@ app.post('/',jsonParser, async function (req, res) {
                         gems += $(el).text() + ' ';   
                     });
                     treasuresSection.each(function(ind, el){
-                        if($(el).text().includes('Spiritual Gems')){
+                        if($(el).text().includes('Espirituwal na Hiyas')){
                             responseObj.push({
                                 sectionName: 'treasures',
                                 title: $(el).text() +gems
