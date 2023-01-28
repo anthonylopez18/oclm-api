@@ -10,6 +10,8 @@ const { json } = require('express');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
+require('dotenv').config();
+
 const fireBaseConfig = {
     type: "service_account",
   project_id: "oclm-api-db",
