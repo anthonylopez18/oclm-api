@@ -10,10 +10,23 @@ const { json } = require('express');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
-const serviceAccount = require('./oclm-api-db-firebase-adminsdk-ggr6y-7ff8779fe5.json');
+const fireBaseConfig = {
+    type: "service_account",
+  project_id: "oclm-api-db",
+  private_key_id: process.env.private_key_id ?? "",
+  private_key: process.env.private_key ?? "",
+  client_email: process.env.client_email,
+  client_id: process.env.client_id,
+  auth_uri: "https://accounts.google.com/o/oauth2/auth",
+  token_uri: "https://oauth2.googleapis.com/token",
+  auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+  client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ggr6y%40oclm-api-db.iam.gserviceaccount.com"
+}
+
+//const serviceAccount = require('./oclm-api-db-firebase-adminsdk-ggr6y-7ff8779fe5.json');
 
 initializeApp({
-  credential: cert(serviceAccount)
+  credential: cert(fireBaseConfig)
 });
 
 const db = getFirestore();
