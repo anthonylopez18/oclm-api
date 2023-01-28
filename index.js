@@ -19,7 +19,7 @@ initializeApp({
 const db = getFirestore();
 
 app.use(cors({
-    origin:['http://localhost:3001', '*'],
+    origin:['http://localhost:3001', '*', 'https://oclm-manager-app.herokuapp.com'],
     methods:['POST']
 }));
 app.get('/', async function (req, res) {
