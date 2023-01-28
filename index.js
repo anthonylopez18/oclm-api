@@ -26,7 +26,7 @@ const fireBaseConfig = {
 //const serviceAccount = require('./oclm-api-db-firebase-adminsdk-ggr6y-7ff8779fe5.json');
 
 initializeApp({
-  credential: cert(fireBaseConfig)
+  credential: cert(JSON.stringify(fireBaseConfig))
 });
 
 const db = getFirestore();
