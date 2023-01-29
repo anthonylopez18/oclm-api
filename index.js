@@ -22,7 +22,6 @@ const fireBaseConfig = {
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ggr6y%40oclm-api-db.iam.gserviceaccount.com"
 }
-console.log('privatekeyId: '+process.env.private_key_id);
 
 //const serviceAccount = require('./oclm-api-db-firebase-adminsdk-ggr6y-7ff8779fe5.json');
 
