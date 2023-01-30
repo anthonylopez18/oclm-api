@@ -202,8 +202,9 @@ app.post('/',jsonParser, async function (req, res) {
             );
             //var body = fetchResponse.text();        
             if(isScheduleDataCached==false){
-                console.log('caching schedule...');
+                console.log('caching schedule...'+ req.body.weekNumber);
                 const scheduleRef = db.collection('schedule').doc(req.body.weekNumber);
+                console.log('obj: ' + responseObj.toString());
                 await scheduleRef.set(responseObj);
             }
             res.send({
