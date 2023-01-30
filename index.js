@@ -140,82 +140,86 @@ app.post('/',jsonParser, async function (req, res) {
                     assignments: assignmentObj
                 });
             }
+            else{
+                console.log('url: '+url);
+                const responseObj = [];
+                const response = await fetch(url)
+                    .then(res => res.text())
+                    .then(
+                        (result) => {
+                            const $ = cheerio.load(result);
+                            const openningSection = $('#section1').find('ul');
+                            const treasuresSection = $('#section2').find('.so');
+                            const gemDetails = $('#section2').find('.sw');
+                            const ministrySection = $('#section3').find('li');
+                            const livingSection = $('#section4').find('li');
+
+                            openningSection.each(function(ind, el){
+                                console.log($(el).text());
+                                responseObj.push({
+                                    sectionName: 'openning',
+                                    title: $(el).text().trim().replace('\n\n', ' ')
+                                });
+                            });
+                            var gems =' '; 
+                            gemDetails.each(function (ind, el){
+                                gems += $(el).text() + ' ';   
+                            });
+                            treasuresSection.each(function(ind, el){
+                                if($(el).text().includes('Espirituwal na Hiyas')){
+                                    responseObj.push({
+                                        sectionName: 'treasures',
+                                        title: $(el).text() +gems
+                                    });   
+                                }
+                                else{
+                                    responseObj.push({
+                                        sectionName: 'treasures',
+                                        title: $(el).text()
+                                    });   
+                                }
+                                
+                            });
+
+                            ministrySection.each(function(ind, el){
+                                console.log($(el).text());
+                                responseObj.push({
+                                    sectionName: 'ministry',
+                                    title: $(el).text().trim().replace('\n\n', ' ')
+                                });
+                            });
+
+                            livingSection.each(function(ind, el){
+                                console.log($(el).text());
+                                responseObj.push({
+                                    sectionName: 'living',
+                                    title: $(el).text().trim().replace('\n\n', ' ')
+                                });
+                            });
+                        }
+                    );
+                    //var body = fetchResponse.text();        
+                    if(isScheduleDataCached==false){
+                        console.log('caching schedule...'+ weekNumber);
+                        const scheduleRef = db.collection('schedule').doc(weekNumber);
+                        console.log('obj: ' + responseObj.toString());
+                        await scheduleRef.set({
+                            info : responseObj
+                        });
+                    }
+                    res.send({
+                        success:true,
+                        response: responseObj,
+                        assignments: assignmentObj
+                    });
+
+            }
     
         }catch{
     
         }
         
-        console.log('url: '+url);
-        const responseObj = [];
-        const response = await fetch(url)
-            .then(res => res.text())
-            .then(
-                (result) => {
-                    const $ = cheerio.load(result);
-                    const openningSection = $('#section1').find('ul');
-                    const treasuresSection = $('#section2').find('.so');
-                    const gemDetails = $('#section2').find('.sw');
-                    const ministrySection = $('#section3').find('li');
-                    const livingSection = $('#section4').find('li');
-
-                    openningSection.each(function(ind, el){
-                        console.log($(el).text());
-                        responseObj.push({
-                            sectionName: 'openning',
-                            title: $(el).text().trim().replace('\n\n', ' ')
-                        });
-                    });
-                    var gems =' '; 
-                    gemDetails.each(function (ind, el){
-                        gems += $(el).text() + ' ';   
-                    });
-                    treasuresSection.each(function(ind, el){
-                        if($(el).text().includes('Espirituwal na Hiyas')){
-                            responseObj.push({
-                                sectionName: 'treasures',
-                                title: $(el).text() +gems
-                            });   
-                        }
-                        else{
-                            responseObj.push({
-                                sectionName: 'treasures',
-                                title: $(el).text()
-                            });   
-                        }
-                         
-                    });
-
-                    ministrySection.each(function(ind, el){
-                        console.log($(el).text());
-                        responseObj.push({
-                            sectionName: 'ministry',
-                            title: $(el).text().trim().replace('\n\n', ' ')
-                        });
-                    });
-
-                    livingSection.each(function(ind, el){
-                        console.log($(el).text());
-                        responseObj.push({
-                            sectionName: 'living',
-                            title: $(el).text().trim().replace('\n\n', ' ')
-                        });
-                    });
-                }
-            );
-            //var body = fetchResponse.text();        
-            if(isScheduleDataCached==false){
-                console.log('caching schedule...'+ weekNumber);
-                const scheduleRef = db.collection('schedule').doc(weekNumber);
-                console.log('obj: ' + responseObj.toString());
-                await scheduleRef.set({
-                    info : responseObj
-                });
-            }
-            res.send({
-                success:true,
-                response: responseObj,
-                assignments: assignmentObj
-            });
+        
     }
     catch (error){
         res.send({
