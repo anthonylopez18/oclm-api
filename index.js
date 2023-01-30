@@ -72,34 +72,7 @@ app.post('/',jsonParser, async function (req, res) {
     var isScheduleDataCached = false;
     var scheduleObj;
     var assignmentObj;
-    try{
-        const assignmentSnapshot = await db.collection('assignments').get();
-        assignmentSnapshot.forEach((doc) => {
-            if(doc.id == weekNumber){
-                console.log(doc.data());
-                assignmentObj = doc.data();
-            }
-        });
-        const snapshot = await db.collection('schedule').get();
-        
-        snapshot.forEach((doc) => {
-            if(doc.id == weekNumber){
-                console.log(doc.data());
-                scheduleObj = doc.data();
-                isScheduleDataCached = true;
-            }
-        });
-        if(isScheduleDataCached == true){
-            res.send({
-                success:true,
-                response: scheduleObj,
-                assignments: assignmentObj
-            });
-        }
-
-    }catch{
-
-    }
+    
     try{
         //var body;
         var date = new Date();
@@ -141,7 +114,34 @@ app.post('/',jsonParser, async function (req, res) {
         console.log(weekNumber);
         const url = "https://wol.jw.org/en/wol/meetings/r"+rValue+"/lp-"+language+"/"+date.getFullYear()+"/"+weekNumber;
 
-        
+        try{
+            const assignmentSnapshot = await db.collection('assignments').get();
+            assignmentSnapshot.forEach((doc) => {
+                if(doc.id == weekNumber){
+                    console.log(doc.data());
+                    assignmentObj = doc.data();
+                }
+            });
+            const snapshot = await db.collection('schedule').get();
+            
+            snapshot.forEach((doc) => {
+                if(doc.id == weekNumber){
+                    console.log(doc.data());
+                    scheduleObj = doc.data();
+                    isScheduleDataCached = true;
+                }
+            });
+            if(isScheduleDataCached == true){
+                res.send({
+                    success:true,
+                    response: scheduleObj,
+                    assignments: assignmentObj
+                });
+            }
+    
+        }catch{
+    
+        }
         
         console.log('url: '+url);
         const responseObj = [];
