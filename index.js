@@ -34,8 +34,10 @@ db.settings({ ignoreUndefinedProperties: true });
 
 app.use(cors({
     origin:['http://localhost:3001', '*', 'https://oclm-manager-app.herokuapp.com'],
-    methods:['POST']
+    methods:['POST'],
+    optionsSuccessStatus: 200 
 }));
+
 app.get('/', async function (req, res) {
     const snapshot = await db.collection('users').get();
     snapshot.forEach((doc) => {
@@ -44,7 +46,7 @@ app.get('/', async function (req, res) {
     
     res.send('OCLM-API');
 })
-
+app.options('*', cors());
 app.post('/assignments',jsonParser, async function (req, res) {
     console.log('weeknumber: '+req.body.weekNumber);
     const docRef = db.collection('assignments').doc(req.body.weekNumber);
@@ -67,7 +69,7 @@ app.post('/assignments',jsonParser, async function (req, res) {
         res.send('SUCCESS!');
 
 })
-
+app.options('*', cors());
 app.post('/',jsonParser, async function (req, res) {
     var isScheduleDataCached = false;
     var scheduleObj;
