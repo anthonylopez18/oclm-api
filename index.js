@@ -127,7 +127,7 @@ app.post('/',jsonParser, async function (req, res) {
             snapshot.forEach((doc) => {
                 if(doc.id == weekNumber){
                     console.log(doc.data());
-                    scheduleObj = doc.data();
+                    scheduleObj = doc.get('info');
                     isScheduleDataCached = true;
                 }
             });
@@ -205,7 +205,9 @@ app.post('/',jsonParser, async function (req, res) {
                 console.log('caching schedule...'+ weekNumber);
                 const scheduleRef = db.collection('schedule').doc(weekNumber);
                 console.log('obj: ' + responseObj.toString());
-                await scheduleRef.set(responseObj);
+                await scheduleRef.set({
+                    info : responseObj
+                });
             }
             res.send({
                 success:true,
