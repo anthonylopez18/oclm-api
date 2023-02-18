@@ -57,8 +57,7 @@ app.get('/week', async function (req, res) {
         });
         res.send({
             success:true,
-            response: scheduleObj,
-            assignments: assignmentObj
+            response: scheduleObj
         });
 })
 app.options('*', cors());
