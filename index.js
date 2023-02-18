@@ -55,11 +55,13 @@ app.get('/week', async function (req, res) {
                 scheduleObj = doc.get('info');
             }
         });
-        res.send({
-            success:true,
-            response: scheduleObj,
-            assignments: assignmentObj
-        });
+        res.send(//{
+            //success:true,
+            //response: scheduleObj,
+            //assignments: assignmentObj
+        //}
+        'HI'
+        );
 })
 app.options('*', cors());
 app.post('/assignments',jsonParser, async function (req, res) {
