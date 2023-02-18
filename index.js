@@ -47,8 +47,17 @@ app.get('/', async function (req, res) {
     res.send('OCLM-API');
 })
 app.get('/week', async function (req, res) {
+    var weekNumber = req.query.week;
+    var assignmentObj;
+    var scheduleObj;
+    const assignmentSnapshot = await db.collection('assignments').get();
+            assignmentSnapshot.forEach((doc) => {
+                if(doc.id == weekNumber){
+                    console.log(doc.data());
+                    assignmentObj = doc.data();
+                }
+            });
     const snapshot = await db.collection('schedule').get();
-        var weekNumber = req.query.week;
         snapshot.forEach((doc) => {
             if(doc.id == weekNumber){
                 console.log(doc.data());
@@ -57,7 +66,8 @@ app.get('/week', async function (req, res) {
         });
         res.send({
             success:true,
-            response: scheduleObj
+            schedule: scheduleObj,
+            assignments: assignmentObj
         });
 })
 app.options('*', cors());
