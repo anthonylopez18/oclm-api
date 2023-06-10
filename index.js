@@ -60,7 +60,7 @@ app.get('/week', async function (req, res) {
         });
     }
     else{
-        assignmentObj = {
+        assignmentObj =new {
             "Treasures": "",
             "Gems": "",
             "LivingPart1": "",
