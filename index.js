@@ -51,33 +51,13 @@ app.get('/week', async function (req, res) {
     var assignmentObj;
     var scheduleObj;
     const assignmentSnapshot = await db.collection('assignments').get();
-    if(!assignmentSnapshot.empty){
-        console.log('assignmentSize:' + assignmentSnapshot.size);
-        assignmentSnapshot.forEach((doc) => {
-            if(doc.id == weekNumber){
-                console.log(doc.data());
-                assignmentObj = doc.data();
-            }
-        });
-    }
-    else{
-        assignmentObj =new {
-            "Treasures": "",
-            "Gems": "",
-            "LivingPart1": "",
-            "LivingPart2": "",
-            "MinistryPart2": " / ",
-            "MinistryPart3": " / ",
-            "LivingPart3": "",
-            "ClosingPrayer": "",
-            "Chairman": "",
-            "CBSReader": "",
-            "Reading": "",
-            "CBS": "",
-            "MinistryPart1": " / ",
-            "OpenningPrayer": ""
-        }
-    }
+            console.log('assignmentSize:' + assignmentSnapshot.size);
+            assignmentSnapshot.forEach((doc) => {
+                if(doc.id == weekNumber){
+                    console.log(doc.data());
+                    assignmentObj = doc.data();
+                }
+            });
             
     const snapshot = await db.collection('schedule').get();
         snapshot.forEach((doc) => {
@@ -86,6 +66,24 @@ app.get('/week', async function (req, res) {
                 scheduleObj = doc.get('info');
             }
         });
+        if(scheduleObj.empty){
+            scheduleObj =new {
+                "Treasures": "",
+                "Gems": "",
+                "LivingPart1": "",
+                "LivingPart2": "",
+                "MinistryPart2": " / ",
+                "MinistryPart3": " / ",
+                "LivingPart3": "",
+                "ClosingPrayer": "",
+                "Chairman": "",
+                "CBSReader": "",
+                "Reading": "",
+                "CBS": "",
+                "MinistryPart1": " / ",
+                "OpenningPrayer": ""
+            }
+        }
         res.send({
             success:true,
             schedule: scheduleObj,
