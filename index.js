@@ -51,7 +51,7 @@ app.get('/week', async function (req, res) {
     var assignmentObj;
     var scheduleObj;
     const assignmentSnapshot = await db.collection('assignments').get();
-    if(assignmentSnapshot.size > 0){
+    if(!assignmentSnapshot.empty){
         assignmentSnapshot.forEach((doc) => {
             if(doc.id == weekNumber){
                 console.log(doc.data());
