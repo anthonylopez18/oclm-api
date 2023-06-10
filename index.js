@@ -51,7 +51,6 @@ app.get('/week', async function (req, res) {
     var assignmentObj;
     var scheduleObj;
     const assignmentSnapshot = await db.collection('assignments').get();
-            console.log('assignmentSize:' + assignmentSnapshot.size);
             assignmentSnapshot.forEach((doc) => {
                 if(doc.id == weekNumber){
                     console.log(doc.data());
@@ -66,7 +65,8 @@ app.get('/week', async function (req, res) {
                 scheduleObj = doc.get('info');
             }
         });
-        console.log('scheduleObjSize:' + snapshot.size);
+        console.log('scheduleObjSize:' + scheduleObj.size);
+        console.log('assignmentSize:' + assignmentObj.size);
 
         res.send({
             success:true,
