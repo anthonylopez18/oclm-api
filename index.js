@@ -50,14 +50,21 @@ app.get('/week', async function (req, res) {
     var weekNumber = req.query.week;
     var assignmentObj;
     var scheduleObj;
+    var hasAssignment = false;
+    var hasSchedule = false;
     const assignmentSnapshot = await db.collection('assignments').get();
             assignmentSnapshot.forEach((doc) => {
                 if(doc.id == weekNumber){
                     console.log(doc.data());
                     assignmentObj = doc.data();
+                    hasAssignment = true;
                 }
             });
-            
+    if(!hasAssignment){
+        assignmentObj = {
+            "msg":"oh no!"
+        }
+    }        
     const snapshot = await db.collection('schedule').get();
         snapshot.forEach((doc) => {
             if(doc.id == weekNumber){
@@ -65,8 +72,6 @@ app.get('/week', async function (req, res) {
                 scheduleObj = doc.get('info');
             }
         });
-        console.log('scheduleObjSize:' + scheduleObj.size);
-        console.log('assignmentSize:' + assignmentObj.size);
 
         res.send({
             success:true,
