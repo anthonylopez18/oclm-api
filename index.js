@@ -62,7 +62,20 @@ app.get('/week', async function (req, res) {
             });
     if(!hasAssignment){
         assignmentObj = {
-            "msg":"oh no!"
+            "Treasures": "",
+            "Gems": "",
+            "LivingPart1": "",
+            "LivingPart2": "",
+            "MinistryPart2": " / ",
+            "MinistryPart3": " / ",
+            "LivingPart3": "",
+            "ClosingPrayer": "",
+            "Chairman": "",
+            "CBSReader": "",
+            "Reading": "",
+            "CBS": "",
+            "MinistryPart1": " / ",
+            "OpenningPrayer": ""
         }
     }        
     const snapshot = await db.collection('schedule').get();
