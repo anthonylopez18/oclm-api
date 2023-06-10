@@ -161,6 +161,7 @@ app.post('/',jsonParser, async function (req, res) {
         var weekNumber = Number.parseFloat((diffDays/7)+1).toFixed(0);
         console.log(weekNumber);
         const url = "https://wol.jw.org/en/wol/meetings/r"+rValue+"/lp-"+language+"/"+date.getFullYear()+"/"+weekNumber;
+        var hasAssignment = false;
 
         try{
             const assignmentSnapshot = await db.collection('assignments').get();
@@ -168,8 +169,27 @@ app.post('/',jsonParser, async function (req, res) {
                 if(doc.id == weekNumber){
                     console.log(doc.data());
                     assignmentObj = doc.data();
+                    hasAssignment = true;
                 }
             });
+            if(!hasAssignment){
+                assignmentObj = {
+                    "Treasures": "",
+                    "Gems": "",
+                    "LivingPart1": "",
+                    "LivingPart2": "",
+                    "MinistryPart2": " / ",
+                    "MinistryPart3": " / ",
+                    "LivingPart3": "",
+                    "ClosingPrayer": "",
+                    "Chairman": "",
+                    "CBSReader": "",
+                    "Reading": "",
+                    "CBS": "",
+                    "MinistryPart1": " / ",
+                    "OpenningPrayer": ""
+                }
+            }   
             const snapshot = await db.collection('schedule').get();
             
             snapshot.forEach((doc) => {
