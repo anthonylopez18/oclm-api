@@ -66,24 +66,8 @@ app.get('/week', async function (req, res) {
                 scheduleObj = doc.get('info');
             }
         });
-        if(scheduleObj.empty){
-            scheduleObj =new {
-                "Treasures": "",
-                "Gems": "",
-                "LivingPart1": "",
-                "LivingPart2": "",
-                "MinistryPart2": " / ",
-                "MinistryPart3": " / ",
-                "LivingPart3": "",
-                "ClosingPrayer": "",
-                "Chairman": "",
-                "CBSReader": "",
-                "Reading": "",
-                "CBS": "",
-                "MinistryPart1": " / ",
-                "OpenningPrayer": ""
-            }
-        }
+        console.log('scheduleObjSize:' + snapshot.size);
+
         res.send({
             success:true,
             schedule: scheduleObj,
