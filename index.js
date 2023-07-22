@@ -112,7 +112,7 @@ app.post('/assignments',jsonParser, async function (req, res) {
         LivingPart1: req.body.LivingPart1,
         CBSReader:req.body.CBSReader
         });
-        res.send(req);
+        res.send(req.body);
 
 })
 app.options('*', cors());
