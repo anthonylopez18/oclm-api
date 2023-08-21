@@ -33,7 +33,7 @@ const db = getFirestore();
 db.settings({ ignoreUndefinedProperties: true });
 
 app.use(cors({
-    origin:['http://localhost:3001', '*', 'https://oclm-manager-app.herokuapp.com'],
+    origin:['http://localhost:3001', '*', 'https://master.d53xntq70mux1.amplifyapp.com'],
     methods:['POST'],
     optionsSuccessStatus: 200 
 }));
