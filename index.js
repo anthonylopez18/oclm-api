@@ -8,6 +8,8 @@ const cheerio = require("cheerio");
 const cors = require('cors');
 const { json } = require('express');
 var bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+dotenv.config();
 var jsonParser = bodyParser.json();
 
 const fireBaseConfig = {
