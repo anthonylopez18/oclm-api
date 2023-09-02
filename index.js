@@ -35,7 +35,7 @@ const db = getFirestore();
 db.settings({ ignoreUndefinedProperties: true });
 
 app.use(cors({
-    origin:['http://localhost:3001', '*', 'https://master.d53xntq70mux1.amplifyapp.com'],
+    origin:['http://localhost:3001', '*', 'https://master.d3ldsmi1fd1rti.amplifyapp.com'],
     methods:['POST'],
     optionsSuccessStatus: 200 
 }));
