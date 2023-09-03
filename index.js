@@ -35,7 +35,7 @@ const db = getFirestore();
 db.settings({ ignoreUndefinedProperties: true });
 
 app.use(cors({
-    origin:['http://localhost:3000', '*', 'https://master.d3ldsmi1fd1rti.amplifyapp.com','https://www.pioneervalleytagalog.com', 'https://pioneervalleytagalog.com'],
+    origin:['http://localhost:3000', '*', 'https://master.d3ldsmi1fd1rti.amplifyapp.com','https://www.pioneervalleytagalog.org', 'https://pioneervalleytagalog.org'],
     methods:['POST'],
     optionsSuccessStatus: 200 
 }));
