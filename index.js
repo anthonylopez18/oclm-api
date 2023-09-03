@@ -117,6 +117,17 @@ app.post('/assignments',jsonParser, async function (req, res) {
         res.send(req);
 
 })
+app.post('/login',jsonParser, async function (req, res) {
+    if(req.body.password ==='Kingdom1914!'){
+        res.statusCode=200;
+    }
+    else{
+        res.statusCode=401;
+    }
+    res.send();
+        
+
+})
 app.options('*', cors());
 app.post('/',jsonParser, async function (req, res) {
     var isScheduleDataCached = false;
