@@ -35,7 +35,7 @@ const db = getFirestore();
 db.settings({ ignoreUndefinedProperties: true });
 
 app.use(cors({
-    origin:['http://localhost:3001', '*', 'https://master.d3ldsmi1fd1rti.amplifyapp.com'],
+    origin:['http://localhost:3000', '*', 'https://master.d3ldsmi1fd1rti.amplifyapp.com'],
     methods:['POST'],
     optionsSuccessStatus: 200 
 }));
@@ -117,6 +117,7 @@ app.post('/assignments',jsonParser, async function (req, res) {
         res.send(req);
 
 })
+app.options('*', cors());
 app.post('/login',jsonParser, async function (req, res) {
     if(req.body.password ==='Kingdom1914!'){
         res.statusCode=200;
