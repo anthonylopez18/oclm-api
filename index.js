@@ -97,6 +97,7 @@ app.get('/week', async function (req, res) {
 app.options('*', cors());
 app.post('/assignments',jsonParser, async function (req, res) {
     console.log('weeknumber: '+req.body.weekNumber);
+    console.log('request: '+ JSON.stringify(req.body));
     const docRef = db.collection('assignments').doc(req.body.weekNumber);
     await docRef.set({
         ClosingPrayer: req.body.ClosingPrayer,
@@ -113,8 +114,15 @@ app.post('/assignments',jsonParser, async function (req, res) {
         Reading: req.body.Reading,
         LivingPart1: req.body.LivingPart1,
         CBSReader:req.body.CBSReader
-        });
-        res.send(req);
+    })
+    .then(
+        console.log("success!")
+    )
+    .catch( (error) =>{
+        console.log(error)
+    })
+    ;
+    res.status(200).send();
 
 })
 app.options('*', cors());
