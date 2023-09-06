@@ -40,6 +40,7 @@ app.use(cors({
     optionsSuccessStatus: 200 
 }));
 
+app.options('*', cors());
 app.get('/', async function (req, res) {
     const snapshot = await db.collection('users').get();
     snapshot.forEach((doc) => {
