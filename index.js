@@ -176,7 +176,7 @@ app.post('/',jsonParser, async function (req, res) {
         console.log('year: ' + date.getFullYear());
         var beginningDate = new Date(date.getFullYear(), 0,1);
         var reqDate = date; //new Date(Date.now());
-        
+        reqDate.setDate(reqDate.getDate() - reqDate.getDay()+1);
         var diff = reqDate - beginningDate;
         var diffTime = Math.abs(reqDate - beginningDate);
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
